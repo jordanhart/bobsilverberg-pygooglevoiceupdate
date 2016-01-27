@@ -39,7 +39,7 @@ class Voice(object):
         except NameError:
             regex = r"('_rnr_se':) '(.+)'"
         try:
-	    content = urlopen(settings.INBOX).read()
+            content = urlopen(settings.INBOX).read()
             sp = re.search(regex, content).group(2)
         except AttributeError:
             sp = None
@@ -68,11 +68,11 @@ class Voice(object):
 
         content = self.__do_page('login').read()
          # holy hackjob
-	galx = re.search(r"name=\"GALX\" type=\"hidden\"\n *value=\"(.+)\"", content).group(1)
-	service = re.search(r"name=\"service\" type=\"hidden\" value=\"(.+)\"", content).group(1)
-	utf8 = re.search(r"type=\"hidden\" id=\"_utf8\" name=\"_utf8\" value=\"(.+)\"", content).group(1)
-	bgresponse = re.search(r"type=\"hidden\" name=\"bgresponse\" id=\"bgresponse\" value=\"(.+)\"", content).group(1)
-	pstMsg = "1"
+        galx = re.search(r"name=\"GALX\" type=\"hidden\"\n *value=\"(.+)\"", content).group(1)
+        service = re.search(r"name=\"service\" type=\"hidden\" value=\"(.+)\"", content).group(1)
+        utf8 = re.search(r"type=\"hidden\" id=\"_utf8\" name=\"_utf8\" value=\"(.+)\"", content).group(1)
+        bgresponse = re.search(r"type=\"hidden\" name=\"bgresponse\" id=\"bgresponse\" value=\"(.+)\"", content).group(1)
+        pstMsg = "1"
 
         self.__do_page('login', {'Email': email, 'Passwd': passwd, 'GALX': galx, '_utf8': utf8, 'bgresponse': bgresponse, 'pstMsg': pstMsg, 'service': service, 'continue': 'https://www.google.com/voice/', 'followup': 'https://www.google.com/voice/'})
         
